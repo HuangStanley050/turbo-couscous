@@ -17,7 +17,10 @@
     "firebase-admin": "^8.9.2",
     "html-pdf": "^2.2.0",
     "mongoose": "^5.8.11",
-    "passport": "^0.4.1"
+    "multer": "^1.4.2",
+    "node-html-parser": "^1.2.4",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0"
   },
   "devDependencies": {
     "concurrently": "^5.1.0",
