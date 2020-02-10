@@ -3,6 +3,10 @@ const pdf = require("html-pdf");
 
 exports.upload = async (req, res) => {
   let html;
+  const options = { format: "Letter" };
+  const fileName =
+    req.file.originalname.substr(0, req.file.originalname.lastIndexOf(".")) ||
+    req.file.originalname;
   try {
     html = await fs.promises.readFile(
       `./temp/${req.file.originalname}`,
@@ -12,11 +16,10 @@ exports.upload = async (req, res) => {
   } catch (err) {
     console.log(err);
   }
-  const options = { format: "Letter" };
 
   pdf
     .create(html, options)
-    .toFile(`./temp/${req.file.originalname}.pdf`, function(err, res) {
+    .toFile(`./temp/${fileName}.pdf`, function(err, res) {
       if (err) return console.log(err);
       //console.log(res); // { filename: '/app/businesscard.pdf' }
     });
