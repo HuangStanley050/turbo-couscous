@@ -20,6 +20,7 @@ admin.initializeApp({
 const bucket = admin.storage().bucket();
 app.set("bucket", bucket);
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.get("/", (req, res) => res.send("Hello"));
 app.use(dataRouter);
 app.use(authRouter);
