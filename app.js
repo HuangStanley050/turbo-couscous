@@ -1,6 +1,7 @@
 const express = require("express");
 const admin = require("firebase-admin");
 const dataRouter = require("./routes/data");
+const authRouter = require("./routes/auth");
 const mongoose = require("mongoose");
 const serviceAccount = require("./burger-react-bc897-firebase-adminsdk-qfgmr-feec2b5006");
 
@@ -21,5 +22,6 @@ app.set("bucket", bucket);
 app.use(express.json());
 app.get("/", (req, res) => res.send("Hello"));
 app.use(dataRouter);
+app.use(authRouter);
 
 module.exports = app;
