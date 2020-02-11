@@ -10,7 +10,6 @@ exports.upload = async (req, res) => {
   try {
     html = await fs.promises.readFile(
       `./temp/${req.file.originalname}`,
-
       "utf8"
     );
   } catch (err) {
