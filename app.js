@@ -1,10 +1,16 @@
 const express = require("express");
 const admin = require("firebase-admin");
 const dataRouter = require("./routes/data");
+const mongoose = require("mongoose");
 const serviceAccount = require("./burger-react-bc897-firebase-adminsdk-qfgmr-feec2b5006");
 
 const app = express();
-
+mongoose
+  .connect(process.env.MONGO_URI)
+  .then(() => {
+    console.log("mongo connected");
+  })
+  .catch(err => console.log(err));
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   storageBucket: "gs://burger-react-bc897.appspot.com"
