@@ -6,7 +6,7 @@ const serviceAccount = require("./burger-react-bc897-firebase-adminsdk-qfgmr-fee
 const app = express();
 
 admin.initializeApp({
-  credential: admin.credential.cert(JSON.stringify(serviceAccount)),
+  credential: admin.credential.cert(serviceAccount),
   storageBucket: "gs://burger-react-bc897.appspot.com"
 });
 
