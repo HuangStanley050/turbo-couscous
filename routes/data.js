@@ -4,12 +4,6 @@ const Multer = require("multer");
 const isAuth = require("../middlewares/isAuth");
 const dataController = require("../controllers/data");
 
-// const multer = Multer({
-//   storage: Multer.memoryStorage(),
-//   limits: {
-//     fileSize: 10 * 1024 * 1024 // no larger than 5mb, you can change as needed.
-//   }
-// });
 const storage = Multer.diskStorage({
   destination: function(req, file, cb) {
     cb(null, "./temp");

@@ -61,7 +61,7 @@ exports.upload = async (req, res) => {
           await User.findByIdAndUpdate(userId, {
             $push: { pdf: pdfId, html: htmlId }
           });
-          // User.findByIdAndUpdate(userId,{html.push(htmlId)});
+
           return res.send({ path: bucketLocation });
         });
     });
