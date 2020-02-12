@@ -22,7 +22,7 @@ const storage = Multer.diskStorage({
 const upload = Multer({ storage: storage });
 
 router
-  .post("/api/upload", upload.single("html"), dataController.upload)
+  .post("/api/upload", isAuth, upload.single("html"), dataController.upload)
   .get("/api/resources", isAuth, (req, res) => {
     res.send("you made it pass the middleware");
   });

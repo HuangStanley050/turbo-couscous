@@ -3,10 +3,15 @@ const pdf = require("html-pdf");
 const { format } = require("util");
 const HTML = require("../models/HTML");
 const PDF = require("../models/PDF");
+const User = require("../models/User");
 const bucketPath =
   "https://storage.googleapis.com/burger-react-bc897.appspot.com";
 exports.upload = async (req, res) => {
   let html;
+  let newHtmlPromise;
+  let newPdfPromise;
+
+  const userId = req.user._id;
   const options = { format: "Letter" };
   const bucket = req.app.get("bucket");
 
@@ -22,9 +27,10 @@ exports.upload = async (req, res) => {
     let newHtml = new HTML({
       //saving to collection HTML
       fileName: req.file.originalname,
-      content: html
+      content: html,
+      user: userId
     });
-    await newHtml.save();
+    newHtmlPromise = newHtml.save();
   } catch (err) {
     console.log(err);
   }
@@ -35,7 +41,7 @@ exports.upload = async (req, res) => {
     .create(html, options)
     .toFile(`./temp/${fileName}-${timeStamp}.pdf`, err => {
       if (err) return console.log(err);
-      //console.log(res); // { filename: '/app/businesscard.pdf' }
+
       const bucketFileName = `${fileName}-${timeStamp}.pdf`;
       const file = bucket.file(bucketFileName);
       fs.createReadStream(`./temp/${bucketFileName}`)
@@ -45,9 +51,17 @@ exports.upload = async (req, res) => {
           const bucketLocation = format(`${bucketPath}/${bucketFileName}`);
           let newPdf = new PDF({
             fileName: bucketFileName,
-            bucketLocation
+            bucketLocation,
+            user: userId
           });
-          await newPdf.save();
+          newPdfPromise = newPdf.save();
+          let result = await Promise.all([newPdfPromise, newHtmlPromise]);
+          let pdfId = result[0]._id;
+          let htmlId = result[1]._id;
+          await User.findByIdAndUpdate(userId, {
+            $push: { pdf: pdfId, html: htmlId }
+          });
+          // User.findByIdAndUpdate(userId,{html.push(htmlId)});
           return res.send({ path: bucketLocation });
         });
     });
