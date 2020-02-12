@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Multer = require("multer");
+const isAuth = require("../middlewares/isAuth");
 const dataController = require("../controllers/data");
 
 // const multer = Multer({
@@ -20,5 +21,9 @@ const storage = Multer.diskStorage({
 
 const upload = Multer({ storage: storage });
 
-router.post("/api/upload", upload.single("html"), dataController.upload);
+router
+  .post("/api/upload", upload.single("html"), dataController.upload)
+  .get("/api/resources", isAuth, (req, res) => {
+    res.send("you made it pass the middleware");
+  });
 module.exports = router;

@@ -16,12 +16,6 @@ passport.deserializeUser((id, done) => {
 passport.use(
   "local",
   new LocalStrategy(async (username, password, done) => {
-    // User.findOne({ username: username }, function (err, user) {
-    //   if (err) { return done(err); }
-    //   if (!user) { return done(null, false); }
-    //   if (!user.verifyPassword(password)) { return done(null, false); }
-    //   return done(null, user);
-    // });
     let user = await User.findOne({ email: username });
     if (!user) {
       return done(null, false, { msg: "no such user" });

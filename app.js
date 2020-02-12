@@ -9,7 +9,7 @@ const serviceAccount = require("./burger-react-bc897-firebase-adminsdk-qfgmr-fee
 require("./config/passportLocal");
 const app = express();
 mongoose
-  .connect(process.env.MONGO_URI)
+  .connect(process.env.MONGO_URI, { useNewUrlParser: true })
   .then(() => {
     console.log("mongo connected");
   })
