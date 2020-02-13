@@ -6,6 +6,12 @@ const PDF = require("../models/PDF");
 const User = require("../models/User");
 const bucketPath =
   "https://storage.googleapis.com/burger-react-bc897.appspot.com";
+
+exports.getDownload = async (req, res) => {
+  const { fileId } = req.params;
+  const downloadUrl = await PDF.findById(fileId, "bucketLocation");
+  res.send({ downloadUrl });
+};
 exports.upload = async (req, res) => {
   let html;
   let newHtmlPromise;

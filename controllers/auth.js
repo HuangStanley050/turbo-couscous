@@ -5,9 +5,11 @@ const isEmailValid = email => {
   const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return re.test(email);
 };
-exports.login = (req, res) => {
-  console.log(req.user);
-  res.send("hello");
+exports.login = async (req, res) => {
+  const userId = req.user._id;
+  const fileIds = await User.findById(userId, "pdf");
+  //console.log(fileIds);
+  res.send({ fileIds });
 };
 exports.register = async (req, res, next) => {
   const { email, password } = req.body;

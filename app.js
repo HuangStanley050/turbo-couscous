@@ -25,6 +25,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
   cookieSession({
+    name: "hmtlPDF",
     maxAge: 1 * 60 * 60 * 1000, // one hour validity for cookie
     keys: [process.env.COOKIE_SECRET]
   })
