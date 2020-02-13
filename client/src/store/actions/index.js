@@ -1,0 +1,5 @@
+export default {
+  LOGIN_START: "LOGIN_START",
+  LOGIN_OKAY: "LOGIN_OKAY",
+  LOGIN_FAIL: "LOGIN_FAIL"
+};

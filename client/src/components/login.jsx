@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
+import { loginStart } from "../store/actions/authActions";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 
 const useForm = () => {
@@ -24,7 +25,7 @@ const useForm = () => {
   return [form, handleChange, resetFields];
 };
 
-const LoginComponent = () => {
+const LoginComponent = ({ login }) => {
   const [form, handleChange, resetFields] = useForm();
   const handleSubmit = e => {
     e.preventDefault();
@@ -32,8 +33,8 @@ const LoginComponent = () => {
       alert("Must provide email/username and password to login");
       return;
     }
-    console.log(form.username, form.password);
-    //login(form);
+    //console.log(form.username, form.password);
+    login(form);
     resetFields();
   };
   return (
@@ -66,5 +67,10 @@ const LoginComponent = () => {
     </div>
   );
 };
-
-export default LoginComponent;
+const mapDispatch = dispatch => ({
+  login: userInfo => dispatch(loginStart(userInfo))
+});
+export default connect(
+  null,
+  mapDispatch
+)(LoginComponent);
