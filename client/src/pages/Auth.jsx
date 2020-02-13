@@ -7,7 +7,6 @@ const AuthPage = () => {
     <>
       <h1>This is Auth page</h1>
       <LoginComponent />
-      <RegisterComponent />
     </>
   );
 };

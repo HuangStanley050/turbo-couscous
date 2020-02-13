@@ -1,16 +1,6 @@
 import React, { useState } from "react";
-import {
-  Button,
-  Form,
-  FormGroup,
-  Label,
-  Input,
-  NavLink,
-  Row,
-  Col,
-  Container,
-  Alert
-} from "reactstrap";
+import { connect } from "react-redux";
+import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 
 const useForm = () => {
   const [form, setValue] = useState({
@@ -42,10 +32,39 @@ const LoginComponent = () => {
       alert("Must provide email/username and password to login");
       return;
     }
+    console.log(form.username, form.password);
     //login(form);
     resetFields();
   };
-  return <h1>This is LoginComponent</h1>;
+  return (
+    <div style={{ width: "60%", margin: "2rem auto" }}>
+      <Form onSubmit={handleSubmit}>
+        <FormGroup>
+          <Label for="exampleEmail">Username</Label>
+          <Input
+            type="email"
+            name="username"
+            id="username"
+            placeholder="email"
+            value={form.username}
+            onChange={handleChange}
+          />
+        </FormGroup>
+        <FormGroup>
+          <Label for="examplePassword">Password</Label>
+          <Input
+            type="password"
+            name="password"
+            id="examplePassword"
+            placeholder="password placeholder"
+            value={form.password}
+            onChange={handleChange}
+          />
+        </FormGroup>
+        <Button type="submit">Submit</Button>
+      </Form>
+    </div>
+  );
 };
 
 export default LoginComponent;
