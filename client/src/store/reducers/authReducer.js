@@ -1,9 +1,21 @@
+import ActionType from "../actions";
 const initialState = {
-  isAuth: false
+  isAuth: false,
+  fileIds: []
 };
 
 const reducer = (state = initialState, action) => {
-  return state;
+  switch (action.type) {
+    case ActionType.LOGIN_OKAY:
+      console.log(action);
+      return {
+        ...state,
+        isAuth: true,
+        fileIds: [...state.fileIds, ...action.info]
+      };
+    default:
+      return state;
+  }
 };
 
 export default reducer;
