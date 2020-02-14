@@ -1,3 +1,4 @@
 export default {
-  login: "/api/login"
+  login: "/api/login",
+  upload: "/api/upload"
 };
