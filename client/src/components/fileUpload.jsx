@@ -10,11 +10,14 @@ const Upload = props => {
   };
   const submitHandler = e => {
     e.preventDefault();
-    const formData = new FormData();
-
-    formData.append("html", file);
-    props.upload(formData);
-    setFile(null);
+    if (file) {
+      const formData = new FormData();
+      formData.append("html", file);
+      setFile(null);
+      document.getElementById("FileUpload").value = "";
+      props.upload(formData);
+    }
+    return;
   };
   return (
     <div>
@@ -25,7 +28,7 @@ const Upload = props => {
             onChange={fileChangeHandler}
             type="file"
             name="file"
-            id="exampleFile"
+            id="FileUpload"
           />
           <FormText color="muted">
             This is some placeholder block-level help text for the above input.
