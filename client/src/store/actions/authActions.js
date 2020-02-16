@@ -12,4 +12,6 @@ export const loginOkay = info => {
     info
   };
 };
+export const logout = () => ({ type: ActionType.LOGOUT });
+
 export const autoLogout = () => ({ type: ActionType.AUTO_LOGOUT });

@@ -6,6 +6,11 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case ActionType.LOGOUT:
+      return {
+        ...state,
+        isAuth: false
+      };
     case ActionType.LOGIN_OKAY:
       console.log(action);
       return {
