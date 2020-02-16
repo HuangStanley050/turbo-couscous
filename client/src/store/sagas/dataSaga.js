@@ -4,7 +4,9 @@ import axios from "axios";
 import API from "../../API";
 
 function* uploadSagaWorker(action) {
-  yield console.log(action.file);
+  yield console.log("file now in saga");
+  let result = yield axios.post(API.upload, action.file);
+  console.log(result.data);
 }
 
 export default function* dataSagaWatcher() {
