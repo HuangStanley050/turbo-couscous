@@ -9,7 +9,8 @@ const reducer = (state = initialState, action) => {
     case ActionType.LOGOUT:
       return {
         ...state,
-        isAuth: false
+        isAuth: false,
+        fileIds: []
       };
     case ActionType.LOGIN_OKAY:
       console.log(action);

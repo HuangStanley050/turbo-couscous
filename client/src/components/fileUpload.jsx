@@ -10,7 +10,12 @@ const Upload = props => {
   };
   const submitHandler = e => {
     e.preventDefault();
+
     if (file) {
+      if (file.type !== "text/html") {
+        alert("Can only upload html file");
+        return;
+      }
       const formData = new FormData();
       formData.append("html", file);
       setFile(null);

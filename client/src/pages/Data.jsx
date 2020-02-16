@@ -6,9 +6,8 @@ import Upload from "../components/fileUpload";
 const DataPage = props => {
   useEffect(() => {
     const timer = setTimeout(() => {
-      console.log("This will run after 1 second!");
       props.logout();
-    }, 50000);
+    }, 3600000); //auto logs out in 60 mins which is when the cookie expires
     return () => clearTimeout(timer);
   }, [props, props.logout]);
   return (
